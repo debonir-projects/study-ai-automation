@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
   },
   "dependencies": {
     "@google-cloud/local-auth": "^3.0.1",
@@ -17,21 +19,34 @@
     "@supabase/supabase-js": "^2.49.4",
     "@vercel/postgres": "^0.10.0",
     "axios": "^1.8.4",
+    "framer-motion": "^11.0.8",
     "googleapis": "^148.0.0",
     "next": "15.2.4",
     "next-auth": "^4.24.11",
     "openai": "^4.90.0",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "react-icons": "^5.0.1",
+    "react-intersection-observer": "^9.8.0",
+    "tailwind-merge": "^2.2.1",
+    "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
+    "@storybook/addon-essentials": "^7.6.17",
+    "@storybook/addon-interactions": "^7.6.17",
+    "@storybook/addon-links": "^7.6.17",
+    "@storybook/blocks": "^7.6.17",
+    "@storybook/nextjs": "^7.6.17",
+    "@storybook/react": "^7.6.17",
+    "@storybook/testing-library": "^0.2.2",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "15.2.4",
+    "storybook": "^7.6.17",
     "tailwindcss": "^4",
     "typescript": "^5"
   }
