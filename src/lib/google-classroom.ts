@@ -1,6 +1,7 @@
 import { google } from 'googleapis';
 import { supabase } from './supabase';
 import { ClassroomData } from './supabase';
+import { Assignment } from '@/types/assignment';
 
 const classroom = google.classroom('v1');
 const calendar = google.calendar('v3');
@@ -91,20 +92,28 @@ export async function syncClassroomData(userId: string, accessToken: string) {
   }
 }
 
-export async function getUpcomingAssignments(userId: string) {
-  try {
-    const { data, error } = await supabase
-      .from('classroom_data')
-      .select('*')
-      .eq('user_id', userId)
-      .gte('due_date', new Date().toISOString())
-      .order('due_date', { ascending: true })
-      .limit(5);
+export async function getUpcomingAssignments(userId: string): Promise<Assignment[]> {
+    try {
+        const response = await fetch('/api/google-cloud/assignments');
+        if (!response.ok) {
+            throw new Error('Failed to fetch assignments');
+        }
+        return await response.json();
+    } catch (error) {
+        console.error('Error fetching assignments:', error);
+        return [];
+    }
+}
 
-    if (error) throw error;
-    return data;
-  } catch (error) {
-    console.error('Error fetching upcoming assignments:', error);
-    return [];
-  }
+export async function getCourses(userId: string) {
+    try {
+        const response = await fetch('/api/google-cloud');
+        if (!response.ok) {
+            throw new Error('Failed to fetch courses');
+        }
+        return await response.json();
+    } catch (error) {
+        console.error('Error fetching courses:', error);
+        return [];
+    }
 } 
