@@ -24,7 +24,7 @@ export default function StudentForm({ onSubmit }: StudentFormProps) {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
-  } = useForm<StudentData>({
+  } = useForm({
     resolver: zodResolver(studentSchema),
   });
 
@@ -42,7 +42,7 @@ export default function StudentForm({ onSubmit }: StudentFormProps) {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      onSubmit={handleSubmit(onSubmit)}
+      onSubmit={handleSubmit((data) => onSubmit(data as StudentData))}
       className="space-y-6"
     >
       <div className="text-center">

@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { UserRole, StudentData, TeacherData, AuthStep } from '@/types/auth';
+import { UserRole, StudentData, TeacherData, AuthStep, VerificationResult } from '@/types/auth';
 import RoleSelector from './RoleSelector';
 import StudentForm from './StudentForm';
 import TeacherForm from './TeacherForm';
@@ -20,7 +20,7 @@ export default function AuthFlow() {
   const [currentStep, setCurrentStep] = useState(1);
   const [role, setRole] = useState<UserRole | null>(null);
   const [userData, setUserData] = useState<StudentData | TeacherData | null>(null);
-  const [verificationResult, setVerificationResult] = useState<any>(null);
+  const [verificationResult, setVerificationResult] = useState<VerificationResult>()
 
   const handleRoleSelect = (selectedRole: UserRole) => {
     setRole(selectedRole);
@@ -32,7 +32,7 @@ export default function AuthFlow() {
     setCurrentStep(3);
   };
 
-  const handleVerificationComplete = (result: any) => {
+  const handleVerificationComplete = (result: VerificationResult) => {
     setVerificationResult(result);
     setCurrentStep(4);
   };
@@ -49,7 +49,7 @@ export default function AuthFlow() {
         );
       case 3:
         return userData ? (
-          <IDVerification userData={userData} onComplete={handleVerificationComplete} />
+          <IDVerification userData={userData} onComplete={(result: VerificationResult) => handleVerificationComplete(result)} />
         ) : null;
       case 4:
         return verificationResult ? (
